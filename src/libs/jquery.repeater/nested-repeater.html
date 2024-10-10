@@ -1,0 +1,18 @@
+<form action="echo.php" className="outer-repeater">
+  <div data-repeater-list="outer-group" className="outer">
+    <div data-repeater-item className="outer">
+      <input type="text" name="text-input" value="A" className="outer"/>
+      <input data-repeater-delete type="button" value="Delete" className="outer"/>
+      <div className="inner-repeater">
+        <div data-repeater-list="inner-group" className="inner">
+          <div data-repeater-item className="inner">
+            <input type="text" name="inner-text-input" value="B" className="inner"/>
+            <input data-repeater-delete type="button" value="Delete" className="inner"/>
+          </div>
+        </div>
+        <input data-repeater-create type="button" value="Add" className="inner"/>
+      </div>
+    </div>
+  </div>
+  <input data-repeater-create type="button" value="Add" className="outer"/>
+</form>
