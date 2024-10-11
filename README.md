@@ -32,3 +32,22 @@ Your app is ready to be deployed!
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+
+โปรแกรม คลินิก | APS_X Platform Hospital Clinic Spa Wellness ศูนย์ดูแลผู้สูงอายุ For Hospital, Clinic, Spa, Wellness, ศูนย์ดูแลผู้สูงอายุ ธุรกิจความงาม คลินิกเฉพาะทาง คลินิกเวชกรรม คลินิกทั่วไป คลินิกพยาบาลผดุงครรภ์ คลินิกกายภาพบำบัด คลินิกแพทย์แผนไทย-จีน คลินิกอายุรกรรม คลินิกแม่และเด็ก คลินิกบําบัดยาเสพติด คลินิกสุขภาพจิต คลินิกตา
+
+
+
+บริษัท เอพีเอส ทีเอช จำกัด ( APSTH )
+
+เราเป็นผู้เชี่ยวชาญด้าน Programmer & Developer จัดจำหน่ายและให้บริการ Software ได้แก่
+
+โปรแกรม คลินิก | APS_X Platform | www.apsth.com
+
+LineID: @apsth
+
+Email: apsth456@gmail.com
+
+Mobile: 0981-816769
+
+Tel: 043-002488
