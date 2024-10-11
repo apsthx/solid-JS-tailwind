@@ -1,4 +1,5 @@
 ﻿import { onMount } from "solid-js";
+import { Img1 } from "../../../helper/img.jsx";
 
 export default function Tabs(){
     onMount(async () => {
@@ -318,7 +319,7 @@ export default function Tabs(){
                       <div class="tab-pane p-3" id="navpill-111" role="tabpanel">
                         <div class="row align-items-center">
                           <div class="col-sm-3">
-                            <img src="../assets/images/big/img1.jpg" alt="" class="img-fluid"/>
+                            <img src={Img1} alt="" class="img-fluid"/>
                           </div>
                           <div class="col-sm-9">
                             <p>

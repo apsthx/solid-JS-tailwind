@@ -1,137 +1,53 @@
 import { onMount } from "solid-js";
+import { darkLogo, lightLogo } from "../../helper/icon";
+import { useLocation } from "@solidjs/router";
+import { createMemo } from "solid-js";
 
 export default function Sidebar() {
-    onMount(() => {
+    const location = useLocation()
+    const activeItem = createMemo(() => location.pathname);
 
-        function handleSidebar() {
-            document.querySelectorAll(".sidebartoggler").forEach(function (element) {
-              element.addEventListener("click", function () {
-                document.querySelectorAll(".sidebartoggler").forEach(function (el) {
-                  el.checked = true;
-                });
-                document
-                  .getElementById("main-wrapper")
-                  .classList.toggle("show-sidebar");
-                document.querySelectorAll(".sidebarmenu").forEach(function (el) {
-                  el.classList.toggle("close");
-                });
-                var dataTheme = document.body.getAttribute("data-sidebartype");
-                if (dataTheme === "full") {
-                  document.body.setAttribute("data-sidebartype", "mini-sidebar");
-                } else {
-                  document.body.setAttribute("data-sidebartype", "full");
-                }
-              });
-            });
-          }
-        
-          handleSidebar();
-        
-          function findMatchingElement() {
-            var currentUrl = window.location.href;
-            var anchors = document.querySelectorAll("#sidebarnav a");
-            for (var i = 0; i < anchors.length; i++) {
-              if (anchors[i].href === currentUrl) {
-                return anchors[i];
-              }
-            }
-        
-            return null; // Return null if no matching element is found
-          }
-          var elements = findMatchingElement();
-        
-          // Do something with the matching element
-          if (elements) {
-            elements.classList.add("active");
-          }
-        
-          document
-            .querySelectorAll("ul#sidebarnav ul li a.active")
-            .forEach(function (link) {
-              link.closest("ul").classList.add("in");
-              link.closest("ul").parentElement.classList.add("selected");
-            });
-        
-          document.querySelectorAll("#sidebarnav li").forEach(function (li) {
-            const isActive = li.classList.contains("selected");
-            if (isActive) {
-              const anchor = li.querySelector("a");
-              if (anchor) {
-                anchor.classList.add("active");
-              }
-            }
-          });
-        
-          document.querySelectorAll("#sidebarnav a").forEach(function (link) {
-            link.addEventListener("click", function (e) {
-              const isActive = this.classList.contains("active");
-              const parentUl = this.closest("ul");
-              if (!isActive) {
-                // hide any open menus and remove all other classes
-                parentUl.querySelectorAll("ul").forEach(function (submenu) {
-                  submenu.classList.remove("in");
-                });
-                parentUl.querySelectorAll("a").forEach(function (navLink) {
-                  navLink.classList.remove("active");
-                });
-        
-                // open our new menu and add the open class
-                const submenu = this.nextElementSibling;
-                if (submenu) {
-                  submenu.classList.add("in");
-                }
-        
-                this.classList.add("active");
-              } else {
-                this.classList.remove("active");
-                parentUl.classList.remove("active");
-                const submenu = this.nextElementSibling;
-                if (submenu) {
-                  submenu.classList.remove("in");
-                }
-              }
-            });
-          });
+
+    onMount(async () => {
+        import("../../assets/libs/simplebar/dist/simplebar.min.js").then(({ initializeSimplebarmin }) => {
+            initializeSimplebarmin();
+        });
+    });
+    onMount(async () => {
+        const module = await import("../../assets/js/simplebar.js");
+        module.initializeSimplebar();
+
     });
     return (
         <aside class="left-sidebar with-vertical">
-            {/* Sidebar scroll*/}
-            {/* ============================================================== */}
-            {/* Logo */}
-            {/* ============================================================== */}
             <div class="navbar-brand brand-logo d-flex align-items-center justify-content-between px-4">
-                <a href="../index.html" class="text-nowrap logo-img">
-                    <img src="../assets/images/logos/dark-logo.svg" class="dark-logo" alt="Logo-Dark" />
+                <a href="/" class="text-nowrap logo-img">
+                    <img src={darkLogo} class="dark-logo" alt="Logo-Dark" />
                 </a>
                 <a href="javascript:void(0)" class="sidebartoggler ms-auto text-decoration-none fs-5 d-block d-xl-none">
                     <i class="ti ti-x" />
                 </a>
             </div>
-            {/* ============================================================== */}
-            {/* End Logo */}
-            {/* ============================================================== */}
             <div class="scroll-sidebar" style={{ "height": "calc(100vh - 100px)" }} data-simplebar>
-                {/* Sidebar navigation*/}
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class>
                         <nav class="nav nav-pills flex-column sidebar-nav">
                             <ul class="list-unstyled">
-                                {/*Getting Started*/}
                                 <li class="nav-small-cap">
                                     <span class="hide-menu">Getting Started</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/index.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/introduction" ? "active" : ""}`} href="/docs/introduction">
                                         <i class="ti ti-home-2" /> Introduction
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-structure.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/structure" ? "active" : ""}`} href="/docs/structure">
                                         <i class="ti ti-packages" /> Package Structure
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-start.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/start" ? "active" : ""}`} href="/docs/start">
                                         <i class="ti ti-brand-abstract" /> Quick Start
                                     </a>
                                 </li>
@@ -143,21 +59,20 @@ export default function Sidebar() {
                                     <span class="hide-menu">Customization</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-layout.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/custom/layouts" ? "active" : ""}`} href="/docs/custom/layouts">
                                         <i class="ti ti-layout-bottombar" /> Layout Options
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-change-logo.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/custom/changeLogo" ? "active" : ""}`} href="/docs/custom/changeLogo">
                                         <i class="ti ti-adjustments-horizontal" /> Change Logo
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-changes-skin-color.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/custom/globalSkinColor" ? "active" : ""}`} href="/docs/custom/globalSkinColor">
                                         <i class="ti ti-palette" /> Global Skin Color
                                     </a>
                                 </li>
-                                {/*Theme UI*/}
                                 <li>
                                     <span class="sidebar-divider lg" />
                                 </li>
@@ -169,22 +84,21 @@ export default function Sidebar() {
                                         <i class="ti ti-file-infinity" />
                                         <span class="hide-menu">Settings</span>
                                     </a>
-                                    {/*sub-menu items*/}
                                     <ul aria-expanded="false" class="collapse first-level list-unstyled">
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-color.html" class="nav-link sub-link">
+                                            <a href="/docs/theme/color" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Color </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-typography.html" class="nav-link sub-link">
+                                            <a href="/docs/theme/typography" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Typography </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-icon.html" class="nav-link sub-link">
+                                            <a href="/docs/theme/icons" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Icons </span>
                                             </a>
@@ -206,91 +120,91 @@ export default function Sidebar() {
                                     {/*sub-menu items*/}
                                     <ul aria-expanded="false" class="collapse first-level list-unstyled">
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-buttons.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/buttons" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Buttons </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-modals.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/modals" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Modals </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-tabs.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/tabs" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Tabs </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-tooltip-popover.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/tooltipPopover" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Tooltip &amp; Popover </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-notification.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/notifications" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Notifications </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-progressbar.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/progressbar" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Progressbar </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-typography.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/typography" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Typography </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-bootstrapui.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/bootstrapui" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Bootstrap UI </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-breadcrumb.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/breadcrumbs" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Breadcrumbs </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-listmedia.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/listmedia" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> List Media </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-grid.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/grids" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Grids </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-carousel.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/carousel" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Carousel </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-scrollspy.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/scrollspy" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Scrollspy </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-toasts.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/toasts" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Toasts </span>
                                             </a>
                                         </li>
                                         <li class="sidebar-item mb-0">
-                                            <a href="../docs/docs-ui-spinner.html" class="nav-link sub-link">
+                                            <a href="/docs/ui/spinner" class="nav-link sub-link">
                                                 <i class="ti ti-point" />
                                                 <span class="hide-menu fs-3"> Spinner </span>
                                             </a>
@@ -305,7 +219,7 @@ export default function Sidebar() {
                                     <span class="hide-menu">Support</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="nav-link sidebar-link d-flex align-items-center" href="../docs/docs-change-log.html">
+                                    <a className={`nav-link sidebar-link d-flex align-items-center ${activeItem() == "/docs/introduction" ? "active" : ""}`} href="../docs/changeLog">
                                         <i class="ti ti-refresh-dot" />Changelog
                                     </a>
                                 </li>
@@ -315,7 +229,6 @@ export default function Sidebar() {
                 </nav>
                 {/* End Sidebar navigation */}
             </div>
-            {/* End Sidebar scroll*/}
         </aside>
     )
 }

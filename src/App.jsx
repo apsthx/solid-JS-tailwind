@@ -106,6 +106,7 @@ import DocsTypography from "./routes/Docs/Typography";
 import Modals from "./routes/Docs/Modals";
 import Grids from "./routes/Docs/Grids";
 import ChangeLog from "./routes/Docs/ChangeLog";
+import TypographyUi from "./routes/Docs/TypographyUI";
 
 
 function App() {
@@ -119,30 +120,37 @@ function App() {
       <Route path="/pages/landingPage" component={LandingPage} />
       {/* <Route path="/" component={Home} /> */}
       <Route path="/" component={DocsLayout}>
-        <Route path="/docs/bootstrapUI" component={DocsBootstrapUI} />
-        <Route path="/docs/breadcrumbs" component={Breadcrumbs} />
-        <Route path="/docs/buttons" component={DocsButtons} />
-        <Route path="/docs/carousel" component={DocsCarousel} />
-        <Route path="/docs/changeLogo" component={DocsChangeLogo} />
-        <Route path="/docs/color" component={Color} />
-        <Route path="/docs/globalSkinColor" component={GlobalSkinColor} />
-        <Route path="/docs/icons" component={Icons} />
         <Route path="/docs/introduction" component={Introduction} />
-        <Route path="/docs/layouts" component={Layouts} />
-        <Route path="/docs/listMedia" component={ListMedia} />
-        <Route path="/docs/notifications" component={Notifications} />
-        <Route path="/docs/progressbar" component={DocsProgressbar} />
-        <Route path="/docs/scrollspy" component={DocsScrollspy} />
-        <Route path="/docs/spinner" component={DocsSpinner} />
-        <Route path="/docs/start" component={Start} />
         <Route path="/docs/structure" component={Structure} />
-        <Route path="/docs/tabs" component={Tabs} />
-        <Route path="/docs/toasts" component={Toasts} />
-        <Route path="/docs/tooltipPopover" component={DocsTooltipPopover} />
-        <Route path="/docs/typography" component={DocsTypography} />
-        <Route path="/docs/modals" component={Modals} />
-        <Route path="/docs/grids" component={Grids} />
-        <Route path="/docs/changeLog" component={ChangeLog} />
+        <Route path="/docs/start" component={Start} />
+
+        <Route path="/docs/custom/changeLogo" component={DocsChangeLogo} />
+        <Route path="/docs/custom/layouts" component={Layouts} />
+        <Route path="/docs/custom/globalSkinColor" component={GlobalSkinColor} />
+
+        <Route path="/docs/theme/color" component={Color} />
+        <Route path="/docs/theme/typography" component={DocsTypography} />
+        <Route path="/docs/theme/icons" component={Icons} />
+
+
+        <Route path="/docs/ui/bootstrapUI" component={DocsBootstrapUI} />
+        <Route path="/docs/ui/breadcrumbs" component={Breadcrumbs} />
+        <Route path="/docs/ui/buttons" component={DocsButtons} />
+        <Route path="/docs/ui/carousel" component={DocsCarousel} />
+        <Route path="/docs/ui/listMedia" component={ListMedia} />
+        <Route path="/docs/ui/notifications" component={Notifications} />
+        <Route path="/docs/ui/progressbar" component={DocsProgressbar} />
+        <Route path="/docs/ui/scrollspy" component={DocsScrollspy} />
+        <Route path="/docs/ui/spinner" component={DocsSpinner} />
+        <Route path="/docs/ui/tabs" component={Tabs} />
+        <Route path="/docs/ui/toasts" component={Toasts} />
+        <Route path="/docs/ui/tooltipPopover" component={DocsTooltipPopover} />
+        <Route path="/docs/ui/modals" component={Modals} />
+        <Route path="/docs/ui/grids" component={Grids} />
+        <Route path="/docs/ui/typography" component={TypographyUi} />
+        
+        
+        <Route path="/docs/version/changeLog" component={ChangeLog} />
       </Route>
       {/* app */}
       <Route path="/" component={MainLayout}>

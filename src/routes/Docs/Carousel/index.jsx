@@ -1,4 +1,5 @@
 ﻿import { onMount } from "solid-js";
+import { blogImg1, blogImg2, blogImg3 } from "../../../helper/icon.jsx";
 
 export default function Carousel(){
     onMount(async () => {
@@ -23,13 +24,13 @@ export default function Carousel(){
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item">
-                          <img src="../assets/images/blog/blog-img1.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg1} class="d-block w-100" alt="..."/>
                         </div>
                         <div class="carousel-item active">
-                          <img src="../assets/images/blog/blog-img2.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg2} class="d-block w-100" alt="..."/>
                         </div>
                         <div class="carousel-item">
-                          <img src="../assets/images/blog/blog-img3.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg3} class="d-block w-100" alt="..."/>
                         </div>
                       </div>
                     </div>
@@ -73,7 +74,7 @@ export default function Carousel(){
                       </ol>
                       <div class="carousel-inner">
                         <div class="carousel-item carousel-item-next carousel-item-start">
-                          <img src="../assets/images/blog/blog-img1.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg1} class="d-block w-100" alt="..."/>
                           <div class="carousel-caption d-none d-md-block">
                             <h5>First slide label</h5>
                             <p>
@@ -83,7 +84,7 @@ export default function Carousel(){
                           </div>
                         </div>
                         <div class="carousel-item">
-                          <img src="../assets/images/blog/blog-img2.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg2} class="d-block w-100" alt="..."/>
                           <div class="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>
@@ -93,7 +94,7 @@ export default function Carousel(){
                           </div>
                         </div>
                         <div class="carousel-item active carousel-item-start">
-                          <img src="../assets/images/blog/blog-img3.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg3} class="d-block w-100" alt="..."/>
                           <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>
@@ -181,13 +182,13 @@ export default function Carousel(){
                     <div id="carouselExampleInterval" class="carousel slide carousel-dark" data-bs-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="10000">
-                          <img src="../assets/images/blog/blog-img1.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg1} class="d-block w-100" alt="..."/>
                         </div>
                         <div class="carousel-item" data-bs-interval="2000">
-                          <img src="../assets/images/blog/blog-img2.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg2} class="d-block w-100" alt="..."/>
                         </div>
                         <div class="carousel-item">
-                          <img src="../assets/images/blog/blog-img3.jpg" class="d-block w-100" alt="..."/>
+                          <img src={blogImg3} class="d-block w-100" alt="..."/>
                         </div>
                       </div>
                       <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">

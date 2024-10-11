@@ -1,4 +1,5 @@
 ﻿import { onMount } from "solid-js";
+import { Img1 } from "../../../helper/img.jsx";
 
 export default function BootstrapUI(){
     onMount(async () => {
@@ -407,15 +408,15 @@ export default function BootstrapUI(){
                     <div class="row">
                       <div class="col-md-4">
                         <h4 class="card-title">Image Rounded</h4>
-                        <img src="../assets/images/big/img1.jpg" alt="image" class="img-fluid rounded mb-4"/>
+                        <img src={Img1} alt="image" class="img-fluid rounded mb-4"/>
                       </div>
                       <div class="col-md-4">
                         <h4 class="card-title">Image Circle</h4>
-                        <img src="../assets/images/big/img1.jpg" alt="image" class="img-fluid rounded-circle mb-4"/>
+                        <img src={Img1} alt="image" class="img-fluid rounded-circle mb-4"/>
                       </div>
                       <div class="col-md-4">
                         <h4 class="card-title">Image with thumbnail</h4>
-                        <img src="../assets/images/big/img1.jpg" alt="image" class="img-fluid img-thumbnail"/>
+                        <img src={Img1} alt="image" class="img-fluid img-thumbnail"/>
                       </div>
                     </div>
                   </div>
